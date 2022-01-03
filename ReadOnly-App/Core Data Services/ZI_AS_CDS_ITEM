@@ -2,7 +2,7 @@
 @AbapCatalog.compiler.compareFilter: true /* Evaluates filter condition in path expression of CDS view
                                              For explanation go to ->"https://eduardocopat.github.io/abap-docs/7.54/abencds_path_expression_attr/"*/
 @AbapCatalog.preserveKey: true /* true-> SQLView will have same key fields as CDS, 
-                                  false-> SQLView key fields will be determined by implicitly derived from the key fields of the basis tables and the join conditions*/
+                                  false-> SQLView key fields will be implicitly derived from the key fields of the basis tables and the join conditions*/
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Interface or BO view for Sales OrderItem'
 define view ZI_AS_CDS_ITEM
