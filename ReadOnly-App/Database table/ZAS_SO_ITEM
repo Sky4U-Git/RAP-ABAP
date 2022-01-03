@@ -1,0 +1,18 @@
+@EndUserText.label : 'Sales Order Item'
+@AbapCatalog.enhancement.category : #EXTENSIBLE_CHARACTER_NUMERIC
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #ALLOWED
+define table zas_so_item {
+  key client  : abap.clnt not null;
+  key so_id   : abap.char(10) not null;
+  key so_item : abap.char(4) not null;
+  material    : abap.char(40);
+  @Semantics.quantity.unitOfMeasure : 'zas_so_item.unit'
+  qty         : abap.quan(5,0);
+  unit        : abap.unit(3);
+  @Semantics.amount.currencyCode : 'zas_so_item.curr_code'
+  price       : /dmo/total_price;
+  curr_code   : /dmo/currency_code;
+
+}
