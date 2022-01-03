@@ -1,0 +1,28 @@
+@AbapCatalog.sqlViewName: 'ZI_AS_SQLV_ITEM'
+@AbapCatalog.compiler.compareFilter: true /* Evaluates filter condition in path expression of CDS view
+                                             For explanation go to ->"https://eduardocopat.github.io/abap-docs/7.54/abencds_path_expression_attr/"*/
+@AbapCatalog.preserveKey: true /* true-> SQLView will have same key fields as CDS, 
+                                  false-> SQLView key fields will be determined by implicitly derived from the key fields of the basis tables and the join conditions*/
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'Interface or BO view for Sales OrderItem'
+define view ZI_AS_CDS_ITEM
+  as select from zas_so_item as SalesItem
+  association to parent ZI_AS_CDS_HEAD as _SalesHeader on $projection.Sales_Order = _SalesHeader.Sales_Order
+  association[0..1] to I_Currency as _Currency on $projection.Currency_Code = _Currency.Currency
+  association[0..1] to I_UnitOfMeasure as _MeasureUnit on $projection.Unit = _MeasureUnit.UnitOfMeasure
+{
+  key so_id     as Sales_Order,
+  key so_item   as Item,
+      material  as Material,
+      @Semantics.quantity.unitOfMeasure: 'unit'  /*'Alias name'*/
+      qty       as Quantity,
+      unit      as Unit,
+      @Semantics.amount.currencyCode: 'currency_code' /*'Alias name'*/
+      price     as Price,
+      curr_code as Currency_Code,
+      /*Associations*/
+      _SalesHeader,
+      _Currency,
+      _MeasureUnit
+      
+}
